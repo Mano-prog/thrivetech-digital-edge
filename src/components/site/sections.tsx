@@ -319,6 +319,7 @@ export function Services() {
 
 /* -------------------- SUBSERVICES: WEBSITES + SOFTWARE -------------------- */
 export function WebsiteTypes() {
+  const { open } = useDetail();
   const items = [
     "Landing Pages", "Business Websites", "Corporate Websites", "Startup Websites",
     "Portfolio Websites", "Agency Websites", "E-Commerce", "Educational Websites",
@@ -336,10 +337,11 @@ export function WebsiteTypes() {
         <Stagger className="lg:col-span-8 grid sm:grid-cols-2 md:grid-cols-3 gap-3">
           {items.map((it) => (
             <StaggerItem key={it}>
-              <div className="rounded-xl glass px-4 py-3.5 flex items-center gap-3 card-hover">
+              <button onClick={() => open(it)} className="text-left w-full rounded-xl glass px-4 py-3.5 flex items-center gap-3 card-hover group">
                 <Globe className="h-4 w-4 text-primary" />
                 <span className="text-sm font-medium">{it}</span>
-              </div>
+                <ArrowUpRight className="ml-auto h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition" />
+              </button>
             </StaggerItem>
           ))}
         </Stagger>
@@ -367,6 +369,7 @@ export function WebsiteTypes() {
 }
 
 export function SoftwareTypes() {
+  const { open } = useDetail();
   const modules = [
     "ERP", "CRM", "HRMS", "Inventory", "Payroll", "Attendance",
     "Fleet Management", "Warehouse", "Hospital Management",
@@ -389,10 +392,11 @@ export function SoftwareTypes() {
         <Stagger className="lg:col-span-7 grid sm:grid-cols-2 md:grid-cols-3 gap-3">
           {modules.map((m) => (
             <StaggerItem key={m}>
-              <div className="rounded-xl glass px-4 py-3.5 flex items-center gap-3 card-hover">
+              <button onClick={() => open(m)} className="text-left w-full rounded-xl glass px-4 py-3.5 flex items-center gap-3 card-hover group">
                 <Boxes className="h-4 w-4 text-primary" />
                 <span className="text-sm font-medium">{m}</span>
-              </div>
+                <ArrowUpRight className="ml-auto h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition" />
+              </button>
             </StaggerItem>
           ))}
         </Stagger>
