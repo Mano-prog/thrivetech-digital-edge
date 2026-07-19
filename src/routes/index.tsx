@@ -3,6 +3,7 @@ import { SiteNav } from "@/components/site/nav";
 import { SiteFooter } from "@/components/site/footer";
 import { WhatsAppFloat } from "@/components/site/whatsapp";
 import { Hero } from "@/components/site/hero";
+import { DetailProvider } from "@/components/site/detail-modal";
 import {
   About, Vision, Mission, CoreValues, WhyChoose, Industries, Services,
   WebsiteTypes, SoftwareTypes, TechnologyStack, Process, Methodology,
@@ -48,9 +49,10 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   return (
-    <div className="relative min-h-screen bg-background text-foreground noise">
-      <SiteNav />
-      <main>
+    <DetailProvider>
+      <div className="relative min-h-screen bg-background text-foreground noise">
+        <SiteNav />
+        <main>
         <Hero />
         <About />
         <Vision />
@@ -69,9 +71,10 @@ function Home() {
         <Testimonials />
         <FAQ />
         <Contact />
-      </main>
-      <SiteFooter />
-      <WhatsAppFloat />
-    </div>
+        </main>
+        <SiteFooter />
+        <WhatsAppFloat />
+      </div>
+    </DetailProvider>
   );
 }

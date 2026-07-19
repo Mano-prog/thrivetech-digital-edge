@@ -11,9 +11,11 @@ import {
 import { Section } from "./section";
 import { Reveal, Stagger, StaggerItem } from "./reveal";
 import { Counter } from "./counter";
+import { useDetail } from "./detail-modal";
 
 /* -------------------- ABOUT -------------------- */
 export function About() {
+  const { open } = useDetail();
   const items = [
     { icon: Sparkles, t: "Who we are", d: "A senior team of engineers, designers and strategists shipping enterprise-grade digital products." },
     { icon: Layers, t: "What we do", d: "End-to-end software, cloud, AI and design — engineered around clear business outcomes." },
@@ -30,13 +32,16 @@ export function About() {
       <Stagger className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {items.map((it) => (
           <StaggerItem key={it.t}>
-            <div className="glass rounded-2xl p-6 h-full card-hover">
-              <div className="h-11 w-11 rounded-xl bg-primary/15 border border-primary/25 grid place-items-center text-primary">
-                <it.icon className="h-5 w-5" />
+            <button onClick={() => open(it.t)} className="text-left w-full glass rounded-2xl p-6 h-full card-hover group">
+              <div className="flex items-center justify-between">
+                <div className="h-11 w-11 rounded-xl bg-primary/15 border border-primary/25 grid place-items-center text-primary">
+                  <it.icon className="h-5 w-5" />
+                </div>
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition" />
               </div>
               <h3 className="mt-5 font-display text-lg font-semibold">{it.t}</h3>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{it.d}</p>
-            </div>
+            </button>
           </StaggerItem>
         ))}
       </Stagger>
@@ -99,6 +104,7 @@ function VisionOrb() {
 
 /* -------------------- MISSION -------------------- */
 export function Mission() {
+  const { open } = useDetail();
   const items = [
     { icon: Rocket, t: "Ship faster", d: "Reduce time-to-market with modern engineering practices and pragmatic delivery." },
     { icon: ShieldCheck, t: "Build securely", d: "Bake security, privacy and compliance into every layer of the stack." },
@@ -115,14 +121,17 @@ export function Mission() {
       <Stagger className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {items.map((it) => (
           <StaggerItem key={it.t}>
-            <div className="relative rounded-2xl p-6 h-full glass card-hover overflow-hidden">
+            <button onClick={() => open(it.t)} className="text-left w-full relative rounded-2xl p-6 h-full glass card-hover overflow-hidden group">
               <div className="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
               <div className="relative">
-                <it.icon className="h-6 w-6 text-primary" />
+                <div className="flex items-center justify-between">
+                  <it.icon className="h-6 w-6 text-primary" />
+                  <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition" />
+                </div>
                 <h3 className="mt-4 font-display text-lg font-semibold">{it.t}</h3>
                 <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{it.d}</p>
               </div>
-            </div>
+            </button>
           </StaggerItem>
         ))}
       </Stagger>
@@ -132,6 +141,7 @@ export function Mission() {
 
 /* -------------------- CORE VALUES -------------------- */
 export function CoreValues() {
+  const { open } = useDetail();
   const values = [
     { icon: Sparkles, t: "Innovation", d: "We look ahead, experiment deliberately, and adopt what genuinely improves outcomes." },
     { icon: ShieldCheck, t: "Integrity", d: "Straight talk, honest estimates, and code we're proud to put our name on." },
@@ -149,14 +159,17 @@ export function CoreValues() {
       <Stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {values.map((v) => (
           <StaggerItem key={v.t}>
-            <div className="group relative rounded-2xl p-8 glass card-hover overflow-hidden h-full">
+            <button onClick={() => open(v.t)} className="text-left w-full group relative rounded-2xl p-8 glass card-hover overflow-hidden h-full">
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-primary/10 via-transparent to-purple/10" />
               <div className="relative">
-                <v.icon className="h-7 w-7 text-primary" />
+                <div className="flex items-center justify-between">
+                  <v.icon className="h-7 w-7 text-primary" />
+                  <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition" />
+                </div>
                 <h3 className="mt-5 font-display text-xl font-semibold">{v.t}</h3>
                 <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{v.d}</p>
               </div>
-            </div>
+            </button>
           </StaggerItem>
         ))}
       </Stagger>
@@ -166,6 +179,7 @@ export function CoreValues() {
 
 /* -------------------- WHY CHOOSE -------------------- */
 export function WhyChoose() {
+  const { open } = useDetail();
   const items = [
     "Enterprise Architecture", "Business-first Approach", "Modern Technologies",
     "Cloud Ready", "Scalable Systems", "Secure Development",
@@ -182,13 +196,13 @@ export function WhyChoose() {
       <div className="grid md:grid-cols-2 gap-4">
         {items.map((it, i) => (
           <Reveal key={it} delay={i * 0.04}>
-            <div className="flex items-center gap-4 rounded-xl glass px-5 py-4 card-hover">
+            <button onClick={() => open(it)} className="text-left w-full flex items-center gap-4 rounded-xl glass px-5 py-4 card-hover group">
               <div className="h-9 w-9 rounded-lg bg-primary/15 border border-primary/25 grid place-items-center">
                 <Check className="h-4 w-4 text-primary" />
               </div>
               <div className="font-medium">{it}</div>
-              <ArrowUpRight className="ml-auto h-4 w-4 text-muted-foreground" />
-            </div>
+              <ArrowUpRight className="ml-auto h-4 w-4 text-muted-foreground group-hover:text-primary transition" />
+            </button>
           </Reveal>
         ))}
       </div>
@@ -211,7 +225,7 @@ const industries = [
 ];
 
 export function Industries() {
-  const [active, setActive] = useState<number | null>(null);
+  const { open } = useDetail();
   return (
     <Section
       id="industries"
@@ -220,42 +234,23 @@ export function Industries() {
       description="We adapt our engineering to the realities of your industry — regulation, scale, compliance and customer expectations."
     >
       <Stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {industries.map((ind, i) => {
-          const open = active === i;
-          return (
-            <StaggerItem key={ind.t}>
-              <button
-                onClick={() => setActive(open ? null : i)}
-                className="text-left w-full rounded-2xl p-6 glass card-hover group"
-                aria-expanded={open}
-              >
-                <div className="flex items-start justify-between">
-                  <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-primary/20 to-purple/20 border border-white/10 grid place-items-center text-primary">
-                    <ind.icon className="h-5 w-5" />
-                  </div>
-                  <span className="text-muted-foreground group-hover:text-foreground transition">
-                    {open ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-                  </span>
+        {industries.map((ind) => (
+          <StaggerItem key={ind.t}>
+            <button
+              onClick={() => open(ind.t)}
+              className="text-left w-full rounded-2xl p-6 glass card-hover group"
+            >
+              <div className="flex items-start justify-between">
+                <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-primary/20 to-purple/20 border border-white/10 grid place-items-center text-primary">
+                  <ind.icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-5 font-display text-lg font-semibold">{ind.t}</h3>
-                <AnimatePresence initial={false}>
-                  {open && (
-                    <motion.p
-                      key="d"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35 }}
-                      className="mt-2 text-sm text-muted-foreground leading-relaxed overflow-hidden"
-                    >
-                      {ind.d}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </button>
-            </StaggerItem>
-          );
-        })}
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition" />
+              </div>
+              <h3 className="mt-5 font-display text-lg font-semibold">{ind.t}</h3>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{ind.d}</p>
+            </button>
+          </StaggerItem>
+        ))}
       </Stagger>
     </Section>
   );
@@ -280,6 +275,7 @@ const services = [
 ];
 
 export function Services() {
+  const { open } = useDetail();
   return (
     <Section
       id="services"
@@ -290,7 +286,7 @@ export function Services() {
       <Stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {services.map((s) => (
           <StaggerItem key={s.t}>
-            <article className="relative rounded-2xl p-6 glass card-hover h-full overflow-hidden group">
+            <button onClick={() => open(s.t)} className="text-left w-full relative rounded-2xl p-6 glass card-hover h-full overflow-hidden group">
               <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{ background: "linear-gradient(120deg, transparent, color-mix(in oklab, var(--primary) 22%, transparent), transparent)" }} />
               <div className="relative">
@@ -313,7 +309,7 @@ export function Services() {
                   <span className="text-foreground/80 font-medium">Business value:</span> {s.v}
                 </div>
               </div>
-            </article>
+            </button>
           </StaggerItem>
         ))}
       </Stagger>
@@ -323,6 +319,7 @@ export function Services() {
 
 /* -------------------- SUBSERVICES: WEBSITES + SOFTWARE -------------------- */
 export function WebsiteTypes() {
+  const { open } = useDetail();
   const items = [
     "Landing Pages", "Business Websites", "Corporate Websites", "Startup Websites",
     "Portfolio Websites", "Agency Websites", "E-Commerce", "Educational Websites",
@@ -340,10 +337,11 @@ export function WebsiteTypes() {
         <Stagger className="lg:col-span-8 grid sm:grid-cols-2 md:grid-cols-3 gap-3">
           {items.map((it) => (
             <StaggerItem key={it}>
-              <div className="rounded-xl glass px-4 py-3.5 flex items-center gap-3 card-hover">
+              <button onClick={() => open(it)} className="text-left w-full rounded-xl glass px-4 py-3.5 flex items-center gap-3 card-hover group">
                 <Globe className="h-4 w-4 text-primary" />
                 <span className="text-sm font-medium">{it}</span>
-              </div>
+                <ArrowUpRight className="ml-auto h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition" />
+              </button>
             </StaggerItem>
           ))}
         </Stagger>
@@ -371,6 +369,7 @@ export function WebsiteTypes() {
 }
 
 export function SoftwareTypes() {
+  const { open } = useDetail();
   const modules = [
     "ERP", "CRM", "HRMS", "Inventory", "Payroll", "Attendance",
     "Fleet Management", "Warehouse", "Hospital Management",
@@ -393,10 +392,11 @@ export function SoftwareTypes() {
         <Stagger className="lg:col-span-7 grid sm:grid-cols-2 md:grid-cols-3 gap-3">
           {modules.map((m) => (
             <StaggerItem key={m}>
-              <div className="rounded-xl glass px-4 py-3.5 flex items-center gap-3 card-hover">
+              <button onClick={() => open(m)} className="text-left w-full rounded-xl glass px-4 py-3.5 flex items-center gap-3 card-hover group">
                 <Boxes className="h-4 w-4 text-primary" />
                 <span className="text-sm font-medium">{m}</span>
-              </div>
+                <ArrowUpRight className="ml-auto h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition" />
+              </button>
             </StaggerItem>
           ))}
         </Stagger>
@@ -502,6 +502,7 @@ const phases = [
 ];
 
 export function Process() {
+  const { open } = useDetail();
   return (
     <Section
       id="process"
@@ -517,18 +518,20 @@ export function Process() {
               <div className={`relative grid sm:grid-cols-2 gap-6 items-center ${i % 2 ? "sm:direction-rtl" : ""}`}>
                 <div className={`${i % 2 ? "sm:order-2 sm:text-left" : "sm:text-right"} pl-12 sm:pl-0 sm:pr-10`}>
                   <div className="text-xs uppercase tracking-[0.2em] text-primary">Phase {String(i + 1).padStart(2, "0")}</div>
-                  <h3 className="mt-2 font-display text-xl font-semibold">{p.t}</h3>
+                  <button onClick={() => open(p.t)} className="mt-2 font-display text-xl font-semibold hover:text-primary transition inline-flex items-center gap-2">
+                    {p.t} <ArrowUpRight className="h-4 w-4" />
+                  </button>
                   <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.d}</p>
                 </div>
                 <div className={`${i % 2 ? "sm:order-1" : ""} relative hidden sm:block`}>
-                  <div className="glass rounded-2xl p-5 mx-6 card-hover">
+                  <button onClick={() => open(p.t)} className="text-left w-full glass rounded-2xl p-5 mx-6 card-hover">
                     <div className="flex items-center gap-3">
                       <div className="h-9 w-9 rounded-lg bg-primary/15 border border-primary/25 grid place-items-center text-primary text-xs font-semibold">
                         {String(i + 1).padStart(2, "0")}
                       </div>
                       <div className="text-sm text-muted-foreground">Deliverables, timeline & sign-off documented per phase.</div>
                     </div>
-                  </div>
+                  </button>
                 </div>
                 <div className="absolute left-4 sm:left-1/2 sm:-translate-x-1/2 top-2 h-3 w-3 rounded-full bg-primary shadow-[0_0_16px] text-primary" />
               </div>
@@ -542,6 +545,7 @@ export function Process() {
 
 /* -------------------- METHODOLOGY -------------------- */
 export function Methodology() {
+  const { open } = useDetail();
   const steps = ["Sprint Planning", "Development", "Testing", "Deployment", "Continuous Improvement"];
   return (
     <Section
@@ -553,10 +557,13 @@ export function Methodology() {
       <Stagger className="grid sm:grid-cols-2 md:grid-cols-5 gap-3">
         {steps.map((s, i) => (
           <StaggerItem key={s}>
-            <div className="glass rounded-2xl p-5 card-hover h-full">
-              <div className="text-xs uppercase tracking-widest text-primary">Step {i + 1}</div>
+            <button onClick={() => open(s)} className="text-left w-full glass rounded-2xl p-5 card-hover h-full group">
+              <div className="flex items-center justify-between">
+                <div className="text-xs uppercase tracking-widest text-primary">Step {i + 1}</div>
+                <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition" />
+              </div>
               <div className="mt-3 font-display text-base font-semibold">{s}</div>
-            </div>
+            </button>
           </StaggerItem>
         ))}
       </Stagger>
@@ -566,6 +573,7 @@ export function Methodology() {
 
 /* -------------------- ENTERPRISE FEATURES -------------------- */
 export function EnterpriseFeatures() {
+  const { open } = useDetail();
   const feats = [
     { icon: Cloud, t: "Cloud Ready" }, { icon: FileCode, t: "API Integration" },
     { icon: LineChart, t: "Analytics" }, { icon: Boxes, t: "Scalable" },
@@ -583,10 +591,13 @@ export function EnterpriseFeatures() {
       <Stagger className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
         {feats.map((f) => (
           <StaggerItem key={f.t}>
-            <div className="rounded-2xl glass p-5 card-hover">
-              <f.icon className="h-5 w-5 text-primary" />
+            <button onClick={() => open(f.t)} className="text-left w-full rounded-2xl glass p-5 card-hover group">
+              <div className="flex items-center justify-between">
+                <f.icon className="h-5 w-5 text-primary" />
+                <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition" />
+              </div>
               <div className="mt-4 font-medium">{f.t}</div>
-            </div>
+            </button>
           </StaggerItem>
         ))}
       </Stagger>
