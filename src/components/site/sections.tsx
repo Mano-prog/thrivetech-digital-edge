@@ -225,7 +225,7 @@ const industries = [
 ];
 
 export function Industries() {
-  const [active, setActive] = useState<number | null>(null);
+  const { open } = useDetail();
   return (
     <Section
       id="industries"
@@ -234,42 +234,23 @@ export function Industries() {
       description="We adapt our engineering to the realities of your industry — regulation, scale, compliance and customer expectations."
     >
       <Stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {industries.map((ind, i) => {
-          const open = active === i;
-          return (
-            <StaggerItem key={ind.t}>
-              <button
-                onClick={() => setActive(open ? null : i)}
-                className="text-left w-full rounded-2xl p-6 glass card-hover group"
-                aria-expanded={open}
-              >
-                <div className="flex items-start justify-between">
-                  <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-primary/20 to-purple/20 border border-white/10 grid place-items-center text-primary">
-                    <ind.icon className="h-5 w-5" />
-                  </div>
-                  <span className="text-muted-foreground group-hover:text-foreground transition">
-                    {open ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-                  </span>
+        {industries.map((ind) => (
+          <StaggerItem key={ind.t}>
+            <button
+              onClick={() => open(ind.t)}
+              className="text-left w-full rounded-2xl p-6 glass card-hover group"
+            >
+              <div className="flex items-start justify-between">
+                <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-primary/20 to-purple/20 border border-white/10 grid place-items-center text-primary">
+                  <ind.icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-5 font-display text-lg font-semibold">{ind.t}</h3>
-                <AnimatePresence initial={false}>
-                  {open && (
-                    <motion.p
-                      key="d"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35 }}
-                      className="mt-2 text-sm text-muted-foreground leading-relaxed overflow-hidden"
-                    >
-                      {ind.d}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </button>
-            </StaggerItem>
-          );
-        })}
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition" />
+              </div>
+              <h3 className="mt-5 font-display text-lg font-semibold">{ind.t}</h3>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{ind.d}</p>
+            </button>
+          </StaggerItem>
+        ))}
       </Stagger>
     </Section>
   );
