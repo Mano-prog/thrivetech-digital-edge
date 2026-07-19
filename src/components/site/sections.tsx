@@ -275,6 +275,7 @@ const services = [
 ];
 
 export function Services() {
+  const { open } = useDetail();
   return (
     <Section
       id="services"
