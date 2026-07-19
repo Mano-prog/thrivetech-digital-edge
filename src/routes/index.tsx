@@ -3,6 +3,7 @@ import { SiteNav } from "@/components/site/nav";
 import { SiteFooter } from "@/components/site/footer";
 import { WhatsAppFloat } from "@/components/site/whatsapp";
 import { Hero } from "@/components/site/hero";
+import { DetailProvider } from "@/components/site/detail-modal";
 import {
   About, Vision, Mission, CoreValues, WhyChoose, Industries, Services,
   WebsiteTypes, SoftwareTypes, TechnologyStack, Process, Methodology,
