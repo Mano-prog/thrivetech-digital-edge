@@ -286,7 +286,7 @@ export function Services() {
       <Stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {services.map((s) => (
           <StaggerItem key={s.t}>
-            <article className="relative rounded-2xl p-6 glass card-hover h-full overflow-hidden group">
+            <button onClick={() => open(s.t)} className="text-left w-full relative rounded-2xl p-6 glass card-hover h-full overflow-hidden group">
               <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{ background: "linear-gradient(120deg, transparent, color-mix(in oklab, var(--primary) 22%, transparent), transparent)" }} />
               <div className="relative">
@@ -309,7 +309,7 @@ export function Services() {
                   <span className="text-foreground/80 font-medium">Business value:</span> {s.v}
                 </div>
               </div>
-            </article>
+            </button>
           </StaggerItem>
         ))}
       </Stagger>
