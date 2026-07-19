@@ -605,60 +605,6 @@ export function EnterpriseFeatures() {
   );
 }
 
-/* -------------------- METHODOLOGY -------------------- */
-export function Methodology() {
-  const steps = ["Sprint Planning", "Development", "Testing", "Deployment", "Continuous Improvement"];
-  return (
-    <Section
-      id="methodology"
-      eyebrow="Methodology"
-      title={<>Agile delivery, <span className="text-gradient-brand">engineered discipline</span>.</>}
-      description="Short cycles. Clear demos. Measurable progress. We combine agile flexibility with the rigor of enterprise engineering."
-    >
-      <Stagger className="grid sm:grid-cols-2 md:grid-cols-5 gap-3">
-        {steps.map((s, i) => (
-          <StaggerItem key={s}>
-            <div className="glass rounded-2xl p-5 card-hover h-full">
-              <div className="text-xs uppercase tracking-widest text-primary">Step {i + 1}</div>
-              <div className="mt-3 font-display text-base font-semibold">{s}</div>
-            </div>
-          </StaggerItem>
-        ))}
-      </Stagger>
-    </Section>
-  );
-}
-
-/* -------------------- ENTERPRISE FEATURES -------------------- */
-export function EnterpriseFeatures() {
-  const feats = [
-    { icon: Cloud, t: "Cloud Ready" }, { icon: FileCode, t: "API Integration" },
-    { icon: LineChart, t: "Analytics" }, { icon: Boxes, t: "Scalable" },
-    { icon: Server, t: "Admin Dashboard" }, { icon: ShieldCheck, t: "Security" },
-    { icon: PenTool, t: "Documentation" }, { icon: Sparkles, t: "SEO Ready" },
-    { icon: Smartphone, t: "Responsive" }, { icon: Cpu, t: "AI Ready" },
-    { icon: Zap, t: "High Performance" }, { icon: Database, t: "Data Modeling" },
-  ];
-  return (
-    <Section
-      id="enterprise"
-      eyebrow="Enterprise Features"
-      title={<>What <span className="text-gradient-brand">enterprise-ready</span> actually means.</>}
-    >
-      <Stagger className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-        {feats.map((f) => (
-          <StaggerItem key={f.t}>
-            <div className="rounded-2xl glass p-5 card-hover">
-              <f.icon className="h-5 w-5 text-primary" />
-              <div className="mt-4 font-medium">{f.t}</div>
-            </div>
-          </StaggerItem>
-        ))}
-      </Stagger>
-    </Section>
-  );
-}
-
 /* -------------------- EXCELLENCE COUNTERS -------------------- */
 export function Excellence() {
   const stats = [
