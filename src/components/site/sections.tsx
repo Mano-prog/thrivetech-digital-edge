@@ -141,6 +141,7 @@ export function Mission() {
 
 /* -------------------- CORE VALUES -------------------- */
 export function CoreValues() {
+  const { open } = useDetail();
   const values = [
     { icon: Sparkles, t: "Innovation", d: "We look ahead, experiment deliberately, and adopt what genuinely improves outcomes." },
     { icon: ShieldCheck, t: "Integrity", d: "Straight talk, honest estimates, and code we're proud to put our name on." },
@@ -158,14 +159,17 @@ export function CoreValues() {
       <Stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {values.map((v) => (
           <StaggerItem key={v.t}>
-            <div className="group relative rounded-2xl p-8 glass card-hover overflow-hidden h-full">
+            <button onClick={() => open(v.t)} className="text-left w-full group relative rounded-2xl p-8 glass card-hover overflow-hidden h-full">
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-primary/10 via-transparent to-purple/10" />
               <div className="relative">
-                <v.icon className="h-7 w-7 text-primary" />
+                <div className="flex items-center justify-between">
+                  <v.icon className="h-7 w-7 text-primary" />
+                  <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition" />
+                </div>
                 <h3 className="mt-5 font-display text-xl font-semibold">{v.t}</h3>
                 <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{v.d}</p>
               </div>
-            </div>
+            </button>
           </StaggerItem>
         ))}
       </Stagger>
@@ -175,6 +179,7 @@ export function CoreValues() {
 
 /* -------------------- WHY CHOOSE -------------------- */
 export function WhyChoose() {
+  const { open } = useDetail();
   const items = [
     "Enterprise Architecture", "Business-first Approach", "Modern Technologies",
     "Cloud Ready", "Scalable Systems", "Secure Development",
@@ -191,13 +196,13 @@ export function WhyChoose() {
       <div className="grid md:grid-cols-2 gap-4">
         {items.map((it, i) => (
           <Reveal key={it} delay={i * 0.04}>
-            <div className="flex items-center gap-4 rounded-xl glass px-5 py-4 card-hover">
+            <button onClick={() => open(it)} className="text-left w-full flex items-center gap-4 rounded-xl glass px-5 py-4 card-hover group">
               <div className="h-9 w-9 rounded-lg bg-primary/15 border border-primary/25 grid place-items-center">
                 <Check className="h-4 w-4 text-primary" />
               </div>
               <div className="font-medium">{it}</div>
-              <ArrowUpRight className="ml-auto h-4 w-4 text-muted-foreground" />
-            </div>
+              <ArrowUpRight className="ml-auto h-4 w-4 text-muted-foreground group-hover:text-primary transition" />
+            </button>
           </Reveal>
         ))}
       </div>
