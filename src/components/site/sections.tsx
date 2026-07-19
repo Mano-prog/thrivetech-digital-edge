@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  ArrowUpRight,
+  ArrowUpRight, Phone,
   ShieldCheck, Sparkles, Users, Rocket, HeartHandshake, Layers,
   Globe, Code2, Smartphone, Palette, Database, Cloud, Cpu, GitBranch, Megaphone, PenTool, Video, LineChart,
   GraduationCap, HeartPulse, Factory, ShoppingBag, UtensilsCrossed, Truck, Landmark, Building2, Home, Briefcase,
