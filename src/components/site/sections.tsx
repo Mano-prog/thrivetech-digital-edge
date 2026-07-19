@@ -104,6 +104,7 @@ function VisionOrb() {
 
 /* -------------------- MISSION -------------------- */
 export function Mission() {
+  const { open } = useDetail();
   const items = [
     { icon: Rocket, t: "Ship faster", d: "Reduce time-to-market with modern engineering practices and pragmatic delivery." },
     { icon: ShieldCheck, t: "Build securely", d: "Bake security, privacy and compliance into every layer of the stack." },
@@ -120,14 +121,17 @@ export function Mission() {
       <Stagger className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {items.map((it) => (
           <StaggerItem key={it.t}>
-            <div className="relative rounded-2xl p-6 h-full glass card-hover overflow-hidden">
+            <button onClick={() => open(it.t)} className="text-left w-full relative rounded-2xl p-6 h-full glass card-hover overflow-hidden group">
               <div className="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
               <div className="relative">
-                <it.icon className="h-6 w-6 text-primary" />
+                <div className="flex items-center justify-between">
+                  <it.icon className="h-6 w-6 text-primary" />
+                  <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition" />
+                </div>
                 <h3 className="mt-4 font-display text-lg font-semibold">{it.t}</h3>
                 <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{it.d}</p>
               </div>
-            </div>
+            </button>
           </StaggerItem>
         ))}
       </Stagger>
