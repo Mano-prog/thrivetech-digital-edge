@@ -502,6 +502,7 @@ const phases = [
 ];
 
 export function Process() {
+  const { open } = useDetail();
   return (
     <Section
       id="process"
@@ -517,18 +518,20 @@ export function Process() {
               <div className={`relative grid sm:grid-cols-2 gap-6 items-center ${i % 2 ? "sm:direction-rtl" : ""}`}>
                 <div className={`${i % 2 ? "sm:order-2 sm:text-left" : "sm:text-right"} pl-12 sm:pl-0 sm:pr-10`}>
                   <div className="text-xs uppercase tracking-[0.2em] text-primary">Phase {String(i + 1).padStart(2, "0")}</div>
-                  <h3 className="mt-2 font-display text-xl font-semibold">{p.t}</h3>
+                  <button onClick={() => open(p.t)} className="mt-2 font-display text-xl font-semibold hover:text-primary transition inline-flex items-center gap-2">
+                    {p.t} <ArrowUpRight className="h-4 w-4" />
+                  </button>
                   <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.d}</p>
                 </div>
                 <div className={`${i % 2 ? "sm:order-1" : ""} relative hidden sm:block`}>
-                  <div className="glass rounded-2xl p-5 mx-6 card-hover">
+                  <button onClick={() => open(p.t)} className="text-left w-full glass rounded-2xl p-5 mx-6 card-hover">
                     <div className="flex items-center gap-3">
                       <div className="h-9 w-9 rounded-lg bg-primary/15 border border-primary/25 grid place-items-center text-primary text-xs font-semibold">
                         {String(i + 1).padStart(2, "0")}
                       </div>
                       <div className="text-sm text-muted-foreground">Deliverables, timeline & sign-off documented per phase.</div>
                     </div>
-                  </div>
+                  </button>
                 </div>
                 <div className="absolute left-4 sm:left-1/2 sm:-translate-x-1/2 top-2 h-3 w-3 rounded-full bg-primary shadow-[0_0_16px] text-primary" />
               </div>
@@ -536,6 +539,68 @@ export function Process() {
           ))}
         </div>
       </div>
+    </Section>
+  );
+}
+
+/* -------------------- METHODOLOGY -------------------- */
+export function Methodology() {
+  const { open } = useDetail();
+  const steps = ["Sprint Planning", "Development", "Testing", "Deployment", "Continuous Improvement"];
+  return (
+    <Section
+      id="methodology"
+      eyebrow="Methodology"
+      title={<>Agile delivery, <span className="text-gradient-brand">engineered discipline</span>.</>}
+      description="Short cycles. Clear demos. Measurable progress. We combine agile flexibility with the rigor of enterprise engineering."
+    >
+      <Stagger className="grid sm:grid-cols-2 md:grid-cols-5 gap-3">
+        {steps.map((s, i) => (
+          <StaggerItem key={s}>
+            <button onClick={() => open(s)} className="text-left w-full glass rounded-2xl p-5 card-hover h-full group">
+              <div className="flex items-center justify-between">
+                <div className="text-xs uppercase tracking-widest text-primary">Step {i + 1}</div>
+                <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition" />
+              </div>
+              <div className="mt-3 font-display text-base font-semibold">{s}</div>
+            </button>
+          </StaggerItem>
+        ))}
+      </Stagger>
+    </Section>
+  );
+}
+
+/* -------------------- ENTERPRISE FEATURES -------------------- */
+export function EnterpriseFeatures() {
+  const { open } = useDetail();
+  const feats = [
+    { icon: Cloud, t: "Cloud Ready" }, { icon: FileCode, t: "API Integration" },
+    { icon: LineChart, t: "Analytics" }, { icon: Boxes, t: "Scalable" },
+    { icon: Server, t: "Admin Dashboard" }, { icon: ShieldCheck, t: "Security" },
+    { icon: PenTool, t: "Documentation" }, { icon: Sparkles, t: "SEO Ready" },
+    { icon: Smartphone, t: "Responsive" }, { icon: Cpu, t: "AI Ready" },
+    { icon: Zap, t: "High Performance" }, { icon: Database, t: "Data Modeling" },
+  ];
+  return (
+    <Section
+      id="enterprise"
+      eyebrow="Enterprise Features"
+      title={<>What <span className="text-gradient-brand">enterprise-ready</span> actually means.</>}
+    >
+      <Stagger className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+        {feats.map((f) => (
+          <StaggerItem key={f.t}>
+            <button onClick={() => open(f.t)} className="text-left w-full rounded-2xl glass p-5 card-hover group">
+              <div className="flex items-center justify-between">
+                <f.icon className="h-5 w-5 text-primary" />
+                <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition" />
+              </div>
+              <div className="mt-4 font-medium">{f.t}</div>
+            </button>
+          </StaggerItem>
+        ))}
+      </Stagger>
     </Section>
   );
 }
