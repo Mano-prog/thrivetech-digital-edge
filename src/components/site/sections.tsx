@@ -11,6 +11,7 @@ import {
 import { Section } from "./section";
 import { Reveal, Stagger, StaggerItem } from "./reveal";
 import { Counter } from "./counter";
+import { useDetail } from "./detail-modal";
 
 /* -------------------- ABOUT -------------------- */
 export function About() {
