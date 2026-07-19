@@ -15,6 +15,7 @@ import { useDetail } from "./detail-modal";
 
 /* -------------------- ABOUT -------------------- */
 export function About() {
+  const { open } = useDetail();
   const items = [
     { icon: Sparkles, t: "Who we are", d: "A senior team of engineers, designers and strategists shipping enterprise-grade digital products." },
     { icon: Layers, t: "What we do", d: "End-to-end software, cloud, AI and design — engineered around clear business outcomes." },
@@ -31,13 +32,16 @@ export function About() {
       <Stagger className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {items.map((it) => (
           <StaggerItem key={it.t}>
-            <div className="glass rounded-2xl p-6 h-full card-hover">
-              <div className="h-11 w-11 rounded-xl bg-primary/15 border border-primary/25 grid place-items-center text-primary">
-                <it.icon className="h-5 w-5" />
+            <button onClick={() => open(it.t)} className="text-left w-full glass rounded-2xl p-6 h-full card-hover group">
+              <div className="flex items-center justify-between">
+                <div className="h-11 w-11 rounded-xl bg-primary/15 border border-primary/25 grid place-items-center text-primary">
+                  <it.icon className="h-5 w-5" />
+                </div>
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition" />
               </div>
               <h3 className="mt-5 font-display text-lg font-semibold">{it.t}</h3>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{it.d}</p>
-            </div>
+            </button>
           </StaggerItem>
         ))}
       </Stagger>
