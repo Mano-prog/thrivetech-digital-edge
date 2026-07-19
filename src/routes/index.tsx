@@ -71,9 +71,10 @@ function Home() {
         <Testimonials />
         <FAQ />
         <Contact />
-      </main>
-      <SiteFooter />
-      <WhatsAppFloat />
-    </div>
+        </main>
+        <SiteFooter />
+        <WhatsAppFloat />
+      </div>
+    </DetailProvider>
   );
 }
