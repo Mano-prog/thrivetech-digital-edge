@@ -500,6 +500,113 @@ for (const [k, o] of Object.entries(methodologySteps)) {
 
 Object.assign(data, industriesData);
 
+/* -------- DIGITAL MARKETING SUB-SERVICES -------- */
+const digitalMarketing: Record<string, Omit<DetailContent, "title" | "eyebrow">> = {
+  "SEO": {
+    overview:
+      "Sustainable organic growth through technical SEO, on-page optimization, content strategy and authoritative link building — engineered for durable rankings.",
+    whatWeDeliver: [
+      "Technical SEO audit & fixes (Core Web Vitals, crawlability, schema)",
+      "Keyword research and topical clusters",
+      "On-page optimization and content briefs",
+      "Off-page: digital PR and link acquisition",
+      "Monthly performance reporting",
+    ],
+    technologies: ["Ahrefs", "SEMrush", "GA4", "Search Console", "Screaming Frog"],
+    benefits: ["Compounding organic traffic", "Lower dependence on paid channels", "Stronger domain authority"],
+  },
+  "Pay-Per-Click (PPC)": {
+    overview:
+      "Data-driven paid search and shopping campaigns that maximize ROAS across Google, Bing and Performance Max.",
+    whatWeDeliver: [
+      "Account structure & keyword strategy",
+      "Ad copy, extensions and creative testing",
+      "Bidding automation and budget pacing",
+      "Landing page conversion optimization",
+      "Attribution and profitability reporting",
+    ],
+    technologies: ["Google Ads", "Microsoft Ads", "GA4", "Looker Studio"],
+    benefits: ["Predictable pipeline", "Higher ROAS", "Faster time-to-market"],
+  },
+  "Social Media Marketing": {
+    overview:
+      "Organic and paid social programs across Instagram, LinkedIn, X, YouTube, TikTok and Facebook — designed around your audience and platform norms.",
+    whatWeDeliver: [
+      "Channel strategy and content calendar",
+      "Creative production (static, video, carousel)",
+      "Community management",
+      "Paid social campaigns & retargeting",
+      "Weekly performance dashboards",
+    ],
+    technologies: ["Meta Ads", "LinkedIn Ads", "TikTok Ads", "Buffer", "Sprout Social"],
+    benefits: ["Brand affinity", "Qualified inbound leads", "Owned audience growth"],
+  },
+  "Content Marketing": {
+    overview:
+      "Editorial strategy and long-form content that earns trust, drives organic traffic and supports every stage of the buyer journey.",
+    whatWeDeliver: ["Editorial strategy", "SEO-driven articles & guides", "Whitepapers and case studies", "Thought leadership ghostwriting", "Content distribution"],
+    benefits: ["Authority & trust", "Compounding SEO value", "Lower CAC over time"],
+  },
+  "Email Marketing": {
+    overview:
+      "Lifecycle, transactional and broadcast email programs with segmentation, personalization and automation.",
+    whatWeDeliver: ["Lifecycle journeys (welcome, nurture, winback)", "Segmentation & personalization", "Template design & coding", "A/B testing", "Deliverability monitoring"],
+    technologies: ["HubSpot", "Klaviyo", "Mailchimp", "Customer.io"],
+    benefits: ["Higher LTV", "Reactivated dormant users", "Predictable revenue"],
+  },
+  "Influencer Marketing": {
+    overview:
+      "Vetted creator partnerships across macro, micro and nano influencers — from strategy to contracts to measurement.",
+    whatWeDeliver: ["Creator discovery & vetting", "Brief and creative direction", "Contracts, negotiation & compliance", "Campaign execution", "Performance measurement"],
+    benefits: ["Authentic reach", "Trust with new audiences", "Scalable UGC"],
+  },
+  "Performance Marketing": {
+    overview:
+      "Full-funnel media buying across search, social, display and native — accountable to pipeline and revenue, not vanity metrics.",
+    whatWeDeliver: ["Cross-channel media plan", "Creative testing framework", "Landing page optimization", "Attribution modeling", "Revenue reporting"],
+    technologies: ["Google Ads", "Meta Ads", "LinkedIn Ads", "GA4", "Segment"],
+    benefits: ["Efficient CAC", "Clear ROI", "Scalable growth"],
+  },
+  "Analytics & Reporting": {
+    overview:
+      "Modern analytics stack — GA4, server-side tracking, dashboards and attribution — so every decision is backed by trustworthy data.",
+    whatWeDeliver: ["GA4 & server-side tracking setup", "Custom dashboards (Looker Studio, Metabase)", "Attribution modeling", "Cohort & retention analysis", "Executive reporting"],
+    technologies: ["GA4", "GTM", "Looker Studio", "Segment", "BigQuery"],
+    benefits: ["Trustworthy metrics", "Faster decisions", "Clear channel ROI"],
+  },
+  "Video & YouTube Ads": {
+    overview:
+      "Short-form and long-form video creative optimized for platform-specific conversion — YouTube, Reels, Shorts and TikTok.",
+    whatWeDeliver: ["Concept & scripting", "Production & post", "Platform-specific edits", "Campaign management", "Retargeting funnels"],
+    benefits: ["Higher engagement", "Lower CPM", "Stronger brand recall"],
+  },
+  "Conversion Rate Optimization": {
+    overview:
+      "Systematic experimentation on landing pages and funnels — hypothesis, test, measure, ship.",
+    whatWeDeliver: ["Analytics & heatmap review", "Hypothesis backlog", "A/B & multivariate tests", "Funnel redesign", "Post-test analysis"],
+    technologies: ["GA4", "Hotjar", "VWO", "Optimizely"],
+    benefits: ["Higher conversion", "Lower CAC", "Compounding revenue lift"],
+  },
+  "Online Reputation Management": {
+    overview:
+      "Brand monitoring, review generation and crisis-response playbooks that protect the brand equity you've built.",
+    whatWeDeliver: ["Brand monitoring & alerts", "Review response & generation", "Crisis playbooks", "Search result cleanup", "Executive reputation"],
+    benefits: ["Protected brand", "Higher trust scores", "Better conversion"],
+  },
+  "Marketing Automation": {
+    overview:
+      "End-to-end marketing automation — from lead capture to nurture to sales handoff — built on the tools you already use.",
+    whatWeDeliver: ["Lead capture & scoring", "Nurture workflows", "CRM integration", "Sales handoff automation", "Reporting dashboards"],
+    technologies: ["HubSpot", "Marketo", "Salesforce", "Zapier", "n8n"],
+    benefits: ["Higher SQL rate", "Faster sales cycles", "Scalable outreach"],
+  },
+};
+for (const [k, v] of Object.entries(digitalMarketing)) {
+  data[k] = { title: k, eyebrow: "Digital Marketing", ...v };
+}
+
+
+
 export function getDetail(key: string): DetailContent | undefined {
   return data[key];
 }
