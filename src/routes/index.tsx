@@ -4,11 +4,14 @@ import { SiteFooter } from "@/components/site/footer";
 import { WhatsAppFloat } from "@/components/site/whatsapp";
 import { Hero } from "@/components/site/hero";
 import { DetailProvider } from "@/components/site/detail-modal";
+import { SmoothScroll } from "@/components/site/smooth-scroll";
+import { DigitalMarketing } from "@/components/site/digital-marketing";
 import {
   About, Vision, Mission, CoreValues, WhyChoose, Industries, Services,
   WebsiteTypes, SoftwareTypes, TechnologyStack, Process, Methodology,
   EnterpriseFeatures, Excellence, Testimonials, FAQ, Contact,
 } from "@/components/site/sections";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -50,6 +53,7 @@ export const Route = createFileRoute("/")({
 function Home() {
   return (
     <DetailProvider>
+      <SmoothScroll />
       <div className="relative min-h-screen bg-background text-foreground noise">
         <SiteNav />
         <main>
@@ -57,6 +61,7 @@ function Home() {
         <About />
         <Vision />
         <Mission />
+
         <CoreValues />
         <WhyChoose />
         <Industries />
