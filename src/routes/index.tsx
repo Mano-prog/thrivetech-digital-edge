@@ -66,6 +66,8 @@ function Home() {
         <WhyChoose />
         <Industries />
         <Services />
+        <DigitalMarketing />
+
         <WebsiteTypes />
         <SoftwareTypes />
         <TechnologyStack />
