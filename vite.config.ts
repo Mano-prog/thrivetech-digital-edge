@@ -12,7 +12,4 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
-  // Outside Lovable builds, force a fully static nitro output so GitHub Actions
-  // can deploy to GitHub Pages. Lovable still forces the Cloudflare preset.
-  nitro: { preset: "static" },
 });
