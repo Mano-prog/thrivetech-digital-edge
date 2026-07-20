@@ -1,0 +1,104 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build site
+        run: bun run build
+
+      - name: Generate static entry for GitHub Pages
+        run: |
+          set -e
+          CLIENT_DIR="dist/client"
+
+          # Find the hashed entry and stylesheet files Vite produced.
+          INDEX_JS=$(find "$CLIENT_DIR/assets" -maxdepth 1 -name 'index-*.js' | head -n 1 | sed "s|$CLIENT_DIR/||")
+          STYLES_CSS=$(find "$CLIENT_DIR/assets" -maxdepth 1 -name 'styles-*.css' | head -n 1 | sed "s|$CLIENT_DIR/||")
+
+          if [ -z "$INDEX_JS" ]; then
+            echo "Could not find index-*.js entry in $CLIENT_DIR/assets"
+            ls -la "$CLIENT_DIR/assets"
+            exit 1
+          fi
+          if [ -z "$STYLES_CSS" ]; then
+            echo "Could not find styles-*.css in $CLIENT_DIR/assets"
+            ls -la "$CLIENT_DIR/assets"
+            exit 1
+          fi
+
+          cat > "$CLIENT_DIR/index.html" <<EOF
+          <!DOCTYPE html>
+          <html lang="en">
+            <head>
+              <meta charset="UTF-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              <meta name="theme-color" content="#050505" />
+              <meta name="description" content="Thrive Tech is an enterprise technology partner delivering custom software, cloud, AI, ERP, CRM and digital solutions engineered for scale, security and long-term growth." />
+              <meta property="og:site_name" content="Thrive Tech" />
+              <meta property="og:title" content="Thrive Tech — Building Intelligent Digital Solutions" />
+              <meta property="og:description" content="Enterprise software, cloud and AI solutions engineered for scale, security and long-term growth." />
+              <meta property="og:type" content="website" />
+              <meta name="twitter:card" content="summary_large_image" />
+              <meta name="twitter:title" content="Thrive Tech — Building Intelligent Digital Solutions" />
+              <meta name="twitter:description" content="Enterprise software, cloud and AI solutions engineered for scale." />
+              <title>Thrive Tech — Building Intelligent Digital Solutions</title>
+              <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+              <link rel="preconnect" href="https://fonts.googleapis.com" />
+              <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+              <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
+              <link rel="stylesheet" href="./${STYLES_CSS}" />
+            </head>
+            <body>
+              <div id="root"></div>
+              <script type="module" src="./${INDEX_JS}"></script>
+            </body>
+          </html>
+          EOF
+
+          # Copy the same shell as the 404 fallback so direct/deep links reload the SPA.
+          cp "$CLIENT_DIR/index.html" "$CLIENT_DIR/404.html"
+
+          echo "Generated static files:"
+          ls -la "$CLIENT_DIR/" | grep -E 'index\.html|404\.html'
+
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/client
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -11,5 +11,8 @@ export default defineConfig({
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    // Disable SSR for production so the build emits a static SPA that can be
+    // deployed to GitHub Pages while still working under Lovable's host.
+    ssr: false,
   },
 });
